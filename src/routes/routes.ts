@@ -4,7 +4,11 @@ import * as booksController from "../controllers/books_controller";
 export const router = express.Router();
 router.get("/books", booksController.getBooks);
 router.get("/books/:bookId", booksController.getBook);
+
 router.post("/books", booksController.saveBook);
 
 // User Story 4 - Update Book By Id Solution
 router.put("/books/:bookId", booksController.updateBook);
+
+// Delete book by ID
+router.delete("/books/:bookId", booksController.deleteBook);

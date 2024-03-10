@@ -22,3 +22,15 @@ export const updateBook = async (bookId: number, book: Book) => {
 		},
 	});
 };
+
+//Delete book by ID
+export const deleteBook = async (bookId: number) => {
+	const book = await Book.findOne({
+		where: { bookId },
+	});
+	if (!book) {
+        throw new Error(`Book with ${bookId} is not found`);
+      }
+	await book.destroy();
+	return true;
+};
