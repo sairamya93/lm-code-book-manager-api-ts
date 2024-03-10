@@ -161,3 +161,14 @@ describe("DELETE /api/v1/books/{bookId} endpoint", () => {
 		expect(res.statusCode).toEqual(404);
 	});
 });
+
+describe("API handling endpoint that is not present", () => {
+	test("status code 404 for endpoint not found", async () => {
+		
+		// Act
+		const res = await request(app).delete("/api/v1/");
+
+		// Assert
+		expect(res.statusCode).toEqual(404);
+	});
+	});
