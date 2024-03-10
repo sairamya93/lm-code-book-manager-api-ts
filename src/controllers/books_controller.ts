@@ -19,9 +19,12 @@ export const getBook = async (req: Request, res: Response) => {
 
 export const saveBook = async (req: Request, res: Response) => {
 	const bookToBeSaved = req.body;
-	try{
-	 const book = await bookService.saveBook(bookToBeSaved);
-	 res.status(201).json(book);
+	try{		
+	 const book = await bookService.saveBook(bookToBeSaved);	 
+	  if(!book) {
+         res.status(409).json(book);
+	  } else
+	     res.status(201).json(book);
 	} catch (error) {
 		res.status(400).json({ message: (error as Error).message });
 	}

@@ -11,7 +11,19 @@ export const getBook = async (bookId: number) => {
 };
 
 export const saveBook = async (book: Book) => {
-	return Book.create<Book>(book);
+	try{
+		const validateBook = await Book.findOne({ where: { title: book.title } });
+		console.log(book.title)
+    if (validateBook) {
+		console.log('I am here validating')
+		throw new Error('Book with this title already exists');
+	}
+	return Book.create<Book>(book);	
+    }catch(error) {
+		console.error('Error adding book:', error);
+		throw error;
+	}
+	
 };
 
 // User Story 4 - Update Book By Id Solution

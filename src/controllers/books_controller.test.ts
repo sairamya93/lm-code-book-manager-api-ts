@@ -166,9 +166,21 @@ describe("API handling endpoint that is not present", () => {
 	test("status code 404 for endpoint not found", async () => {
 		
 		// Act
-		const res = await request(app).delete("/api/v1/");
+		const res = await request(app).get("/api/v1/");
 
 		// Assert
 		expect(res.statusCode).toEqual(404);
 	});
 	});
+
+	describe("Handling error response when trying to add same book title", () => {
+		test("status code 409 for conflict in adding book", async () => {
+			//Act
+			const res = await request(app)
+			.post("/api/v1/books")
+			.send({ bookId: 1, title: "The Hobbit", author: "J. R. R. Tolkien" });
+				
+			// Assert
+			expect(res.statusCode).toEqual(409);
+		});
+		});
