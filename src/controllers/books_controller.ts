@@ -22,7 +22,7 @@ export const saveBook = async (req: Request, res: Response) => {
 	try{		
 	 const book = await bookService.saveBook(bookToBeSaved);	 
 	  if(!book) {
-         res.status(409).json(book);
+         res.status(409).send("Book already exists"); //If book already exists
 	  } else
 	     res.status(201).json(book);
 	} catch (error) {
@@ -41,9 +41,8 @@ export const updateBook = async (req: Request, res: Response) => {
 
 // Delete book by ID
 export const deleteBook = async (req: Request, res: Response) => {
-	const bookId = req.params.bookId;
-	const bookStatus = await bookService.deleteBook(Number(bookId));
-
+	const bookId = req.params.bookId;	
+	const bookStatus = await bookService.deleteBook(Number(bookId))	
 	if (bookStatus) {
 		res.status(204).json("Book deleted successfully")
 	} else {

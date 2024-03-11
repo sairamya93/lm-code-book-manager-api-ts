@@ -136,11 +136,6 @@ describe("POST /api/v1/books endpoint", () => {
 
 describe("DELETE /api/v1/books/{bookId} endpoint", () => {
 	test("status code 204 deletion success for a book that is found", async () => {
-		// Arrange
-		jest
-			.spyOn(bookService, "deleteBook")
-			.mockResolvedValue(true)
-
 		// Act
 		const res = await request(app).delete("/api/v1/books/1");
 
@@ -150,10 +145,7 @@ describe("DELETE /api/v1/books/{bookId} endpoint", () => {
 	});
 
 	test("status code successfully 404 for a book that is not found", async () => {
-		// Arrange
-
-		jest
-			.spyOn(bookService, "deleteBook")			
+					
 		// Act
 		const res = await request(app).get("/api/v1/books/5");
 
@@ -163,8 +155,7 @@ describe("DELETE /api/v1/books/{bookId} endpoint", () => {
 });
 
 describe("API handling endpoint that is not present", () => {
-	test("status code 404 for endpoint not found", async () => {
-		
+	test("status code 404 for endpoint not found", async () => {		
 		// Act
 		const res = await request(app).get("/api/v1/");
 
@@ -173,7 +164,7 @@ describe("API handling endpoint that is not present", () => {
 	});
 	});
 
-	describe("Handling error response when trying to add same book title", () => {
+describe("Handling error response when trying to add same book title", () => {
 		test("status code 409 for conflict in adding book", async () => {
 			//Act
 			const res = await request(app)
@@ -183,4 +174,4 @@ describe("API handling endpoint that is not present", () => {
 			// Assert
 			expect(res.statusCode).toEqual(409);
 		});
-		});
+	});
