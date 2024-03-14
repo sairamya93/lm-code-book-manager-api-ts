@@ -7,4 +7,5 @@ dbUserName: process.env.DB_USERNAME ?? "",
 dbPassword: process.env.DB_PASSWORD ?? "",
 dbHost: process.env.DB_HOST ?? "localhost",
 dbDialect: process.env.DB_DIALECT ?? "sqlite",
+dbPort: process.env.DB_PORT ?? ""
 } as const;
